@@ -124,7 +124,7 @@ RUN chmod 777 /srv/f7t/test_sbatch_mv.sh
 RUN chmod 700 /srv/f7t/test_sbatch_forbidden.sh
 
 # SSSD setup
-RUN yum -y install sssd && yum clean allgst
+RUN yum -y install sssd && yum clean all
 COPY cluster/sssd/sssd.conf /etc/sssd/sssd.conf
 RUN chmod 600 /etc/sssd/sssd.conf \
     && sed -i '6iauth        sufficient    pam_sss.so use_first_pass' /etc/pam.d/system-auth \
