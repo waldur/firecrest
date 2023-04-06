@@ -193,6 +193,8 @@ services:
     hostname: cluster
     volumes:
       - ./logs/cluster/:/var/log/slurm/:delegated
+      # Overwrite default sssd conf
+      - ./cluster/sssd.conf:/etc/sssd/sssd.conf
     depends_on:
       ldap:
         condition: service_started
