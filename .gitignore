@@ -8,3 +8,6 @@ __pycache__/
 **/deploy/demo/minio/
 doc/build/
 .vscode/
+
+deploy/demo/cluster/sssd.conf
+deploy/demo/ldap/glauth.env
