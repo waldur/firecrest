@@ -11,4 +11,5 @@ doc/build/
 
 deploy/demo/cluster/sssd.conf
 deploy/demo/ondemand/ood_portal.yaml
+deploy/demo/ondemand/sssd.conf
 deploy/demo/ldap/glauth.env

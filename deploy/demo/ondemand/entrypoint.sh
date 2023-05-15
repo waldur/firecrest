@@ -15,7 +15,8 @@ then
     echo "---> Starting SSSD on ondemand ..."
     # Sometimes on shutdown pid still exists, so delete it
     rm -f /var/run/sssd.pid
-    /sbin/sssd --logger=stderr -d 2 -i 2>&1 &
+    chown root:root /etc/sssd/sssd.conf
+    /sbin/sssd -i --logger=files -d 2 &
 
     echo "---> Cleaning NGINX ..."
     /opt/ood/nginx_stage/sbin/nginx_stage nginx_clean
