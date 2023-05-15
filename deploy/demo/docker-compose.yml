@@ -230,6 +230,7 @@ services:
       - home:/home
       - ./ondemand/ood_portal.yaml:/etc/ood/config/ood_portal.yml
       - ./ondemand/entrypoint.sh:/usr/local/bin/entrypoint.sh
+      - ./ondemand/sssd.conf:/etc/sssd/sssd.conf
     expose:
       - "22"
     ports:
@@ -244,7 +245,6 @@ services:
     container_name: fckeycloak
     env_file: keycloak/keycloak.env
     command: start-dev  --http-relative-path /auth --import-realm
-
     networks:
       firecrest-internal:
         ipv4_address: 192.168.220.20
