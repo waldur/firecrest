@@ -10,4 +10,5 @@ doc/build/
 .vscode/
 
 deploy/demo/cluster/sssd.conf
+deploy/demo/ondemand/ood_portal.yaml
 deploy/demo/ldap/glauth.env

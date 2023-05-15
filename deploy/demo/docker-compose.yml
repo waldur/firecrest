@@ -14,6 +14,11 @@ networks:
       config:
         - subnet: 192.168.220.0/24
 
+volumes:
+  etc_munge:
+  etc_slurm:
+  home:
+
 services:
   f7t-base:
     container_name: f7t-base
@@ -193,6 +198,9 @@ services:
     hostname: cluster
     volumes:
       - ./logs/cluster/:/var/log/slurm/:delegated
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - home:/home
       # Overwrite default sssd conf
       - ./cluster/sssd.conf:/etc/sssd/sssd.conf
     depends_on:
@@ -208,6 +216,29 @@ services:
     env_file: ldap/glauth.env
 
   # complementary 3rd party services
+  ondemand:
+    image: ubccr/hpcts:ondemand-2023.05
+    command: ["serve"]
+    hostname: ondemand
+    container_name: ondemand
+    networks:
+      firecrest-internal:
+        ipv4_address: 192.168.220.24
+    volumes:
+      - etc_munge:/etc/munge
+      - etc_slurm:/etc/slurm
+      - home:/home
+      - ./ondemand/ood_portal.yaml:/etc/ood/config/ood_portal.yml
+      - ./ondemand/entrypoint.sh:/usr/local/bin/entrypoint.sh
+    expose:
+      - "22"
+    ports:
+      - "3443:3443"
+    depends_on:
+      - cluster
+    links:
+      - "cluster:frontend"
+
   keycloak:
     image: "quay.io/keycloak/keycloak:18.0.2"
     container_name: fckeycloak
