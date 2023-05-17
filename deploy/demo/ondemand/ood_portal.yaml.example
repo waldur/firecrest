@@ -1,23 +1,18 @@
-listen_addr_port:
-  - '3443'
-servername: localhost
-port: 3443
-
-ssl:
-  - 'SSLCertificateFile "/etc/pki/tls/certs/localhost.crt"'
-  - 'SSLCertificateKeyFile "/etc/pki/tls/private/localhost.key"'
-
-# Use OIDC authentication
 auth:
   - "AuthType openid-connect"
   - "Require valid-user"
 
-node_uri: "/node"
-rnode_uri: "/rnode"
+root_uri: "/ondemand/pun/sys/dashboard"
+public_uri: "/ondemand/public"
+logout_uri: "/ondemand/logout"
+node_uri: "/ondemand/node"
+rnode_uri: "/ondemand/rnode"
+nginx_uri: "/ondemand/nginx"
+pun_uri: "/ondemand/pun"
 
 dex: false
 
-oidc_uri: "/oidc"
+oidc_uri: "/ondemand/oidc"
 oidc_provider_metadata_url: "http://keycloak.example.com:8080/auth/realms/realm/.well-known/openid-configuration"
 oidc_client_id: "clientid"
 oidc_client_secret: "secret"
@@ -32,4 +27,4 @@ oidc_settings:
   OIDCPassClaimsAs: "environment"
   OIDCStripCookies: "mod_auth_openidc_session mod_auth_openidc_session_chunks mod_auth_openidc_session_0 mod_auth_openidc_session_1"
   OIDCResponseType: "code"
-  OIDCRedirectURI: https://:3443/oidc
+  OIDCRedirectURI: http://ondemand.examople.com/ondemand/oidc

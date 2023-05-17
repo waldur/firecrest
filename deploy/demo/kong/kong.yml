@@ -9,6 +9,7 @@ _format_version: "1.1"
 plugins:
 - name: jwt
   # global plugin: applies to all request
+  enabled: false
   config:
     #_comment: "MUST add exp (expiration), not enabled by default"
     claims_to_verify: [exp]
@@ -47,7 +48,7 @@ plugins:
 consumers:
 - username: firecrest
   custom_id: firecrest
-    
+
 jwt_secrets:
 - consumer: firecrest
   key: http://localhost:8080/auth/realms/kcrealm
@@ -104,4 +105,20 @@ services:
     methods: [DELETE,GET,POST,PUT]
     paths:
     - /reservations
-
+- name: keycloak
+  url: http://192.168.220.20:8080/auth/
+  routes:
+  - name: keycloak
+    methods: [DELETE,GET,POST,PUT]
+    preserve_host: true
+    paths:
+      - /auth/
+- name: ondemand
+  url: http://192.168.220.24:80
+  routes:
+  - name: ondemand
+    preserve_host: true
+    methods: [DELETE,GET,POST,PUT]
+    strip_path: false
+    paths:
+      - /ondemand
