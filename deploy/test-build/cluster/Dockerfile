@@ -59,10 +59,6 @@ RUN set -x \
     && chown -R slurm:slurm /var/log/slurm   \
     && chown -R slurm:slurm /var/spool/slurm*
 
-RUN usermod -u 998 munge \
-    && groupmod -g 996 munge \
-    && chown -R munge:munge /etc/munge/
-
 COPY cluster/slurm/*.conf /etc/slurm/
 COPY cluster/slurm/*.sh /
 # slurmdbd requires slurmdbd.conf with 600
