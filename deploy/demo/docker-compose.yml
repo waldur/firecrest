@@ -190,11 +190,16 @@ services:
     networks:
       firecrest-internal:
         ipv4_address: 192.168.220.12
+    # to allow ssh'ing into container from host port
+    #ports:
+    #  - '443:22'
     hostname: cluster
     volumes:
       - ./logs/cluster/:/var/log/slurm/:delegated
       # Overwrite default sssd conf
       - ./cluster/sssd.conf:/etc/sssd/sssd.conf
+      # preserve users over rebuild
+      - ./cluster_home:/home
 
   ldap:
     container_name: ldap

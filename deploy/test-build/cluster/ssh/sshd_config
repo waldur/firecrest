@@ -101,12 +101,15 @@ Subsystem       sftp    /usr/libexec/openssh/sftp-server
 #Match Address 192.168.0.0/16
     TrustedUserCAKeys /etc/ssh/ca-key.pub
     # only accept this CA, and not regular priv/pub SSH keys
-    PubkeyAcceptedKeyTypes ssh-rsa-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com
+    #PubkeyAcceptedKeyTypes ssh-rsa-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com
     PermitRootLogin  no
     #DenyGroups root bin admin sys
     #AllowUsers user1
     MaxAuthTries 1
     AllowTcpForwarding no
-    ForceCommand /ssh_command_wrapper.sh
-    PermitTTY no
+    #ForceCommand /ssh_command_wrapper.sh
+    #PermitTTY no
     PermitTunnel no
+
+AuthorizedKeysCommand /usr/bin/sss_ssh_authorizedkeys
+AuthorizedKeysCommandUser root
